@@ -1,1 +1,1 @@
-# VGP_Asian_elephant
+# Asian elephant VGP genome (mEleMax1)
