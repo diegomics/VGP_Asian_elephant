@@ -1,0 +1,58 @@
+#!/bin/bash
+
+## Full installation (Meryl v1.3) #########################################
+##conda create -n MERQURY_env -c conda-forge -c bioconda merqury openjdk=11
+##cd ../Software
+##git clone https://github.com/tbenavi1/genomescope2.0.git
+##cd genomescope2.0/
+##echo "R_LIBS=~/R_libs/" >> ~/.Renviron
+##Rscript install.R
+###########################################################################
+
+#SBATCH -J meryl
+#SBATCH -o ../stdout/meryl.%j.out
+#SBATCH -e ../stderr/meryl.%j.err
+##SBATCH -D 
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=..@..
+
+#SBATCH --partition=begendiv,main
+#SBATCH --qos=standard
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=64G
+#SBATCH --time=24:00:00
+
+#export PATH=../Software/meryl-1.3/bin/:$PATH
+export PATH=../Software/anaconda3/bin:$PATH
+source activate MERQURY_env
+
+GENOMESCOPE2="../Software/genomescope2.0/genomescope.R"
+
+
+## Only change this: ####################################################
+FQ_DIR="../Elephant_project/mEleMax1/intermediates/trimmed"
+OUT_DIR="../Elephant_project/mEleMax1/evaluation/meryl"
+GENOMESCOPE_OUT_DIR="../Elephant_project/mEleMax1/evaluation/genomescope"
+FINAL_NAME="HiFi_trimmed"
+#########################################################################
+
+
+# build meryl database for each file
+mkdir -p $OUT_DIR
+cd $OUT_DIR
+for i in $(ls $FQ_DIR/*.fastq.gz)
+do
+        NAME=$(basename $i .fastq.gz)
+        meryl k=21 memory=64 threads=24 count $i output $NAME\.meryl
+done
+
+# merge all databases
+meryl k=21 memory=64 threads=24 union-sum output $FINAL_NAME\.meryl *.meryl
+
+# get histogram for genomescope
+meryl histogram $FINAL_NAME\.meryl | sed 's/\t/ /g' > $FINAL_NAME\.hist
+
+# run genomescope
+mkdir -p $GENOMESCOPE_OUT_DIR
+Rscript $GENOMESCOPE2 -i $OUT_DIR/$FINAL_NAME\.hist -o $GENOMESCOPE_OUT_DIR -k 21 --fitted_hist
