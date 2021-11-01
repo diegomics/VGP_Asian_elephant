@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#SBATCH -J fastqc
+#SBATCH -o ../stdout/fastqc.%j.out
+#SBATCH -e ../stderr/fastqc.%j.err
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=..@..
+
+#SBATCH --partition=begendiv,main
+#SBATCH --qos=standard
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=4G
+#SBATCH --time=24:00:00
+
+module load FastQC/0.11.9-Java-11
+
+FQ_DIR="../Elephant_project/mEleMax1/genomic_data/pacbio"
+OUT_DIR="../Elephant_project/mEleMax1/evaluation/fastqc"
+
+for i in $(ls $FQ_DIR/*.fastq.gz)
+do
+        fastqc -t 12 -f fastq -o $OUT_DIR $i
+done
+
