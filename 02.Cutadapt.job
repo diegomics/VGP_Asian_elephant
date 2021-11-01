@@ -1,0 +1,36 @@
+#!/bin/bash
+
+## Full installation ###################################
+##conda create -n CUTADAPT_env cutadapt   #cutadapt v3.5
+########################################################
+
+#SBATCH -J cutadapt
+#SBATCH -o ../stdout/cutadapt.%j.out
+#SBATCH -e ../stderr/cutadapt.%j.err
+##SBATCH -D 
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=..@..
+
+#SBATCH --partition=begendiv,main
+#SBATCH --qos=standard
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=4G
+#SBATCH --time=48:00:00
+
+export PATH=../Software/anaconda3/bin:$PATH
+source activate CUTADAPT_env
+
+
+## Only change this: #######################################################
+FQ_DIR="../Elephant_project/mEleMax1/genomic_data/pacbio"
+OUT_DIR="../Elephant_project/mEleMax1/intermediates/trimmed"
+############################################################################
+
+mkdir -p $OUT_DIR
+
+for i in $(ls $FQ_DIR/*.fastq.gz)
+do
+        NAME=$(basename $i .fastq.gz)
+cutadapt -j 12 -o $OUT_DIR/$NAME\.trimmed.fastq.gz $i -b ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT -b ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT -n 3 -e 0.1 -O 35 --rc --discard-trimmed
+done
