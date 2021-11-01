@@ -1,5 +1,12 @@
 #!/bin/bash
 
+## Full installation (hifiasm v0.16.1) ###
+##conda create -n HIFIASM_env
+##conda activate HIFIASM_env
+##conda install -c bioconda hifiasm
+##########################################
+
+
 #SBATCH -J hifiasm
 #SBATCH -o ../stdout/hifiasm.%j.out
 #SBATCH -e ../stderr/hifiasm.%j.err
