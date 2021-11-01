@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#SBATCH -J hifiasm
+#SBATCH -o ../stdout/hifiasm.%j.out
+#SBATCH -e ../stderr/hifiasm.%j.err
+##SBATCH -D
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=..@..
+
+#SBATCH --partition=begendiv,main
+#SBATCH --qos=standard
+#SBATCH --cpus-per-task=48
+#SBATCH --mem=192G
+#SBATCH --time=100:00:00
+
+export PATH=../Software/anaconda3/bin:$PATH
+source activate HIFIASM_env
+
+## Only change this: ############################################
+FQ_DIR="../Elephant_project/mEleMax1/intermediates/trimmed"
+OUT_DIR="../Elephant_project/mEleMax1/intermediates/hifiasm"
+#################################################################
+
+mkdir -p $OUT_DIR
+cd $OUT_DIR
+hifiasm -o mEleMax1.asm -t 48 -l0 $FQ_DIR/*.trimmed.fastq.gz 2> mEleMax1_asm.log
