@@ -1,0 +1,182 @@
+#!/bin/bash
+
+## Full installation ######################################################
+##conda create -n PURGEDUPS_env
+##conda activate PURGEDUPS_env
+##conda install -c bioconda purge_dups bwa samtools
+##conda install -c conda-forge matplotlib
+###########################################################################
+
+#SBATCH -J purge_dups
+#SBATCH -o ../stdout/purge_dups.%j.out
+#SBATCH -e ../stderr/purge_dups.%j.err
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=..@..
+
+#SBATCH --partition=begendiv,main
+#SBATCH --qos=standard
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=64G
+#SBATCH --time=72:00:00
+
+export PATH=../Software/anaconda3/bin:$PATH
+source activate PURGEDUPS_env
+
+
+## Only change this: ##########################################################
+OUT_DIR="../Elephant_project/mEleMax1/intermediates/purge_dups/l3_108"
+PRI="../Elephant_project/mEleMax1/intermediates/hifiasm_l3_108/mEleMax1_c1.l3_108.fa"
+PRI_NAME=$(basename $ASM .fa)
+ALT="../Elephant_project/mEleMax1/intermediates/hifiasm_l3_108/mEleMax1_c2.l3_108.fa"
+HIFI_DIR="../Elephant_project/mEleMax1/intermediates/trimmed"
+PARAM_DIR="../Elephant_project/mEleMax1/evaluation/genomescope"
+TRANS="$(cat $PARAM_DIR/Transition_parameter)"
+MAX_DEPTH="$(cat $PARAM_DIR/Maximum_depth)"
+CUTOFFS=$TRANS\_$MAX_DEPTH
+HIST_PLOT="../Software/purge_dups/scripts/hist_plot.py"
+###############################################################################
+
+
+
+##### PART 1
+mkdir -p $OUT_DIR/p1
+
+#A: align HiFi reads to c1 and generate BAM files, then calculate read depth histogram and base-level read depth
+cd $OUT_DIR/p1
+for i in $(ls $HIFI_DIR/*.trimmed.fastq.gz)
+do
+	READ_NAME=$(basename $i .fastq.gz)
+	minimap2 -xmap-hifi -I 4G -t 24 $PRI $i | gzip -c - > $OUT_DIR/p1/$READ_NAME\.paf.gz
+done
+pbcstat *.paf.gz #(produces PB.base.cov and PB.stat files)
+calcuts PB.stat > cutoffs_default 2>calcults_default.log
+python3 $HIST_PLOT -c cutoffs_default PB.stat PB_default.png
+
+### VGP suggested cutoffs:
+calcuts -m$TRANS -u$MAX_DEPTH PB.stat > cutoffs_$CUTOFFS
+python3 $HIST_PLOT -c cutoffs_$CUTOFFS PB.stat PB_$CUTOFFS\.png
+##
+
+
+#B: Split an assembly and do a self-self alignment
+cd $OUT_DIR/p1
+split_fa $PRI > $PRI_NAME\.split
+minimap2 -t 18 -xasm5 -DP $PRI_NAME\.split $PRI_NAME\.split | pigz -p 6 -c - > $PRI_NAME\.split.self.paf.gz
+
+
+##### PART 2
+
+#C: Purge haplotigs and overlaps
+cd $OUT_DIR/p1
+purge_dups -2 -T cutoffs_default -c PB.base.cov $PRI_NAME\.split.self.paf.gz > dups_default.bed 2> purge_dups_default.log
+purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov $PRI_NAME\.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
+
+#D: Get purged primary and haplotig sequences from draft assembly
+cd $OUT_DIR/p1
+get_seqs -e dups_default.bed $PRI
+mv purged.fa purged_default.fa
+mv hap.fa hap_default.fa
+get_seqs -e dups_$CUTOFFS\.bed $PRI
+mv purged.fa purged_$CUTOFFS\.fa
+mv hap.fa hap_$CUTOFFS\.fa
+
+
+########################################################################
+##### REVIEW
+# to manually change cutoff
+#cd $OUT_DIR/p1
+
+#LOW=5
+#MID=36
+#UP=120
+#CUTOFFS=$LOW\_$MID\_$UP
+#calcuts -l$LOW -m$MID -u$UP PB.stat > cutoffs_$CUTOFFS
+#python3 $HIST_PLOT -c cutoffs_$CUTOFFS PB.stat PB_$CUTOFFS\.png
+
+##### PART 2 (post review)
+
+#C: Purge haplotigs and overlaps
+#cd $OUT_DIR/p1
+#purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov $PRI_NAME\.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
+
+#D: Get purged primary and haplotig sequences from draft assembly
+#cd $OUT_DIR/p1
+#get_seqs -e dups_$CUTOFFS\.bed $PRI
+#mv purged.fa purged_$CUTOFFS\.fa
+#mv hap.fa hap_$CUTOFFS\.fa
+#######################################################################
+
+
+##### PART 3
+mkdir -p $OUT_DIR/q2
+
+#E: Merge hap_.fa and ALT
+cd $OUT_DIR/q2
+cat $ALT >> c2p2.fa; cat $OUT_DIR/p1/hap_$CUTOFFS\.fa >> c2p2.fa
+
+#F: align HiFi reads to c2p2 and generate BAM files, then calculate read depth histogram and base-level read depth
+cd $OUT_DIR/q2
+for i in $(ls $HIFI_DIR/*.trimmed.fastq.gz)
+do
+        READ_NAME=$(basename $i .fastq.gz)
+        minimap2 -xmap-hifi -I 4G -t 24 c2p2.fa $i | gzip -c - > $OUT_DIR/q2/$READ_NAME\.paf.gz
+done
+pbcstat *.paf.gz
+calcuts PB.stat > cutoffs_default 2>calcults_default.log
+python3 $HIST_PLOT -c cutoffs_default PB.stat PB_default.png
+
+### VGP suggested cutoffs:
+calcuts -m$TRANS -u$MAX_DEPTH PB.stat > cutoffs_$CUTOFFS
+python3 $HIST_PLOT -c cutoffs_$CUTOFFS PB.stat PB_$CUTOFFS\.png
+##
+
+
+#G: Split an assembly and do a self-self alignment
+cd $OUT_DIR/q2
+split_fa c2p2.fa > c2p2.split
+minimap2 -t 18 -xasm5 -DP c2p2.split c2p2.split | pigz -p 6 -c - > c2p2.split.self.paf.gz
+
+
+##### PART 4
+
+#H: Purge haplotigs and overlaps
+cd $OUT_DIR/q2
+purge_dups -2 -T cutoffs_default -c PB.base.cov c2p2.split.self.paf.gz > dups_default.bed 2> purge_dups_default.log
+purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov c2p2.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
+
+
+#I: Get purged primary and haplotig sequences from draft assembly
+cd $OUT_DIR/q2
+get_seqs -e dups_default.bed c2p2.fa
+mv purged.fa purged_default.fa
+mv hap.fa hap_default.fa
+get_seqs -e dups_$CUTOFFS\.bed c2p2.fa
+mv purged.fa purged_$CUTOFFS\.fa
+mv hap.fa hap_$CUTOFFS\.fa
+
+
+########################################################################
+##### REVIEW
+# to manually change cutoff
+#cd $OUT_DIR/q2
+
+#LOW=5
+#MID=36
+#UP=120
+#CUTOFFS=$LOW\_$MID\_$UP
+#calcuts -l$LOW -m$MID -u$UP PB.stat > cutoffs_$CUTOFFS
+#python3 $HIST_PLOT -c cutoffs_$CUTOFFS PB.stat PB_$CUTOFFS\.png
+
+##### PART 4 (post review)
+
+#H: Purge haplotigs and overlaps
+#cd $OUT_DIR/q2
+#purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov c2p2.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
+
+#I: Get purged primary and haplotig sequences from draft assembly
+#cd $OUT_DIR/q2
+#get_seqs -e dups_$CUTOFFS\.bed c2p2.fa
+#mv purged.fa purged_$CUTOFFS\.fa
+#mv hap.fa hap_$CUTOFFS\.fa
+#######################################################################
