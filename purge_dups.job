@@ -25,10 +25,10 @@ source activate PURGEDUPS_env
 
 
 ## Only change this: ##########################################################
-OUT_DIR="../Elephant_project/mEleMax1/intermediates/purge_dups/l3_108"
-PRI="../Elephant_project/mEleMax1/intermediates/hifiasm_l3_108/mEleMax1_c1.l3_108.fa"
-PRI_NAME=$(basename $ASM .fa)
-ALT="../Elephant_project/mEleMax1/intermediates/hifiasm_l3_108/mEleMax1_c2.l3_108.fa"
+OUT_DIR="../Elephant_project/mEleMax1/intermediates/purge_dups/l0_108"
+PRI="../Elephant_project/mEleMax1/intermediates/hifiasm_l0_108/mEleMax1_c1.l0_108.fa"
+PRI_NAME=$(basename $PRI .fa)
+ALT="../Elephant_project/mEleMax1/intermediates/hifiasm_l0_108/mEleMax1_c2.l0_108.fa"
 HIFI_DIR="../Elephant_project/mEleMax1/intermediates/trimmed"
 PARAM_DIR="../Elephant_project/mEleMax1/evaluation/genomescope"
 TRANS="$(cat $PARAM_DIR/Transition_parameter)"
@@ -88,8 +88,8 @@ mv hap.fa hap_$CUTOFFS\.fa
 #cd $OUT_DIR/p1
 
 #LOW=5
-#MID=36
-#UP=120
+#MID=32
+#UP=108
 #CUTOFFS=$LOW\_$MID\_$UP
 #calcuts -l$LOW -m$MID -u$UP PB.stat > cutoffs_$CUTOFFS
 #python3 $HIST_PLOT -c cutoffs_$CUTOFFS PB.stat PB_$CUTOFFS\.png
@@ -97,14 +97,14 @@ mv hap.fa hap_$CUTOFFS\.fa
 ##### PART 2 (post review)
 
 #C: Purge haplotigs and overlaps
-#cd $OUT_DIR/p1
-#purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov $PRI_NAME\.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
+cd $OUT_DIR/p1
+purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov $PRI_NAME\.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
 
 #D: Get purged primary and haplotig sequences from draft assembly
-#cd $OUT_DIR/p1
-#get_seqs -e dups_$CUTOFFS\.bed $PRI
-#mv purged.fa purged_$CUTOFFS\.fa
-#mv hap.fa hap_$CUTOFFS\.fa
+cd $OUT_DIR/p1
+get_seqs -e dups_$CUTOFFS\.bed $PRI
+mv purged.fa purged_$CUTOFFS\.fa
+mv hap.fa hap_$CUTOFFS\.fa
 #######################################################################
 
 
@@ -162,8 +162,8 @@ mv hap.fa hap_$CUTOFFS\.fa
 #cd $OUT_DIR/q2
 
 #LOW=5
-#MID=36
-#UP=120
+#MID=32
+#UP=108
 #CUTOFFS=$LOW\_$MID\_$UP
 #calcuts -l$LOW -m$MID -u$UP PB.stat > cutoffs_$CUTOFFS
 #python3 $HIST_PLOT -c cutoffs_$CUTOFFS PB.stat PB_$CUTOFFS\.png
