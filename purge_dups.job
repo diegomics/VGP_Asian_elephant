@@ -146,7 +146,7 @@ purge_dups -2 -T cutoffs_default -c PB.base.cov c2p2.split.self.paf.gz > dups_de
 purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov c2p2.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
 
 
-#I: Get purged primary and haplotig sequences from draft assembly
+#I: Get purged and haplotig sequences from draft assembly
 cd $OUT_DIR/q2
 get_seqs -e dups_default.bed c2p2.fa
 mv purged.fa purged_default.fa
@@ -174,7 +174,7 @@ mv hap.fa hap_$CUTOFFS\.fa
 #cd $OUT_DIR/q2
 #purge_dups -2 -T cutoffs_$CUTOFFS -c PB.base.cov c2p2.split.self.paf.gz > dups_$CUTOFFS\.bed 2> purge_dups_$CUTOFFS\.log
 
-#I: Get purged primary and haplotig sequences from draft assembly
+#I: Get purged and haplotig sequences from draft assembly
 #cd $OUT_DIR/q2
 #get_seqs -e dups_$CUTOFFS\.bed c2p2.fa
 #mv purged.fa purged_$CUTOFFS\.fa
