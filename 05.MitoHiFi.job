@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# RUN THIS JOB WITH: sbatch --output=~/Elephant_project/mEleMax1/mito/%x.%j.out  --error=~/Elephant_project/mEleMax1/mito/%x.%j.err mitohifi.job
+
+## Full installation ###################################################################################
+## you need git and docker installed in your computer, then:
+#git clone https://github.com/marcelauliano/MitoHiFi.git
+#cd MitoHiFi
+#docker build .
+## the proccess ends with something like:
+## => => writing image sha256:8ae54726050901698fc62445563fac17ec18a8ca68ea5d2f4e0abcd840af133d    
+#docker save sha256:8ae54726050901698fc62445563fac17ec18a8ca68ea5d2f4e0abcd840af133d -o mitohifi-v2.tar
+## then scp mitohifi-v2.tar to CURTA
+## now in CURTA:
+#module load singularity
+#singularity build mitohifi-v2.sif docker-archive://mitohifi-v2.tar
+#rm mitohifi-v2.tar
+########################################################################################################
+
+#SBATCH -J mitohifi
+
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=..@..
+
+#SBATCH --partition=begendiv,main
+#SBATCH --qos=standard
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=24G
+#SBATCH --time=2-00:00:00
+
+module load singularity
+
+mkdir -p ~/Elephant_project/mEleMax1/mito/from_l2.108_c1c2
+cd ~/Elephant_project/mEleMax1/mito/from_l2.108_p1q2
+singularity exec --bind ~/:~/ ~/Software/mitohifi-v2.sif mitohifi_v2.py -c ~/Elephant_project/mEleMax1/intermediates/purge_dups/l2_108/p1q2.fa -f ~/Elephant_project/mEleMax1/mito/ncbi/NC_005129.fasta -g ~/Elephant_project/mEleMax1/mito/ncbi/NC_005129.gb -t 12 -p 90 -t 12 -o 2
