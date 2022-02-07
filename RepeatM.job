@@ -12,7 +12,6 @@
 #SBATCH --mail-user=..@..
 
 #SBATCH --partition=begendiv,main
-##SBATCH -w b004
 #SBATCH --qos=standard
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=48G
@@ -22,14 +21,14 @@ module load singularity
 
 
 
-## Only change this: ############################################
+## Only change these: ####################################################
 OUT_DIR="~/Elephant_project/mEleMax1/repeat"
 ASSEMBLY="~/Elephant_project/mEleMax1/intermediates/bionano/l2/l2_s1.fa"
 ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
 BIND_DIR="~/"
 TET_SIF="~/Software/tetools_latest.sif"
 SPECIES_NAME='Elephas maximus'
-#################################################################
+#########################################################################
 
 
 echo "=== 1/5. Indexing genome for RepeatModeler  ======================================="
