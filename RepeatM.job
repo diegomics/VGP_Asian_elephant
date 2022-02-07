@@ -26,6 +26,8 @@ module load singularity
 OUT_DIR="~/Elephant_project/mEleMax1/repeat"
 ASSEMBLY="~/Elephant_project/mEleMax1/intermediates/bionano/l2/l2_s1.fa"
 ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+BIND_DIR="~/"
+TET_SIF="~/Software/tetools_latest.sif"
 SPECIES_NAME='Elephas maximus'
 #################################################################
 
@@ -35,14 +37,14 @@ echo "=== 1/5. Indexing genome for RepeatModeler  ==============================
 mkdir -p "${OUT_DIR}/01_modeler"
 cd "${OUT_DIR}/01_modeler"
 ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
-singularity exec --bind ~/:~/ ~/Software/tetools_latest.sif \
+singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 BuildDatabase -name ${ASSEMBLY_NAME} ${ASSEMBLY_NAME}.fa
 
 
 echo "=== 2/5. Starting RepeatModeler  =================================================="
 
 srun \
-singularity exec --bind ~/:~/ ~/Software/tetools_latest.sif \
+singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 RepeatModeler -database ${ASSEMBLY_NAME} -pa ${SLURM_CPUS_PER_TASK} -LTRStruct
 
 
@@ -51,7 +53,7 @@ echo "=== 3/5. Combining repeats library  ======================================
 mkdir -p "${OUT_DIR}/02_libraries"
 cd "${OUT_DIR}/02_libraries"
 srun \
-singularity exec --bind ~/:~/ --pwd /opt/RepeatMasker/Libraries/ ~/Software/tetools_latest.sif \
+singularity exec --bind ${BIND_DIR}:${BIND_DIR} --pwd /opt/RepeatMasker/Libraries/ $TET_SIF \
 famdb.py -i RepeatMaskerLib.h5 families --format fasta_name --include-class-in-name --ancestors --descendants "${SPECIES_NAME}" > ${ASSEMBLY_NAME}-rm.fa
 
 cat ${ASSEMBLY_NAME}-rm.fa "${OUT_DIR}/01_modeler/${ASSEMBLY_NAME}" > "${ASSEMBLY_NAME}_combined.fa"
@@ -63,19 +65,19 @@ mkdir -p "${OUT_DIR}/03_masker"
 cd "${OUT_DIR}/03_masker"
 ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
 srun \
-singularity exec --bind ~/:~/ ~/Software/tetools_latest.sif \
+singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}-rm.fa" ${ASSEMBLY_NAME}.fa
 
 
 echo "=== 5/5. Plotting results  ========================================================"
 
 srun \
-singularity exec --bind ~/:~/ ~/Software/tetools_latest.sif \
+singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 calcDivergenceFromAlign.pl -s ${ASSEMBLY_NAME}.align.divsum -a ${ASSEMBLY_NAME}.align_with_div ${ASSEMBLY_NAME}.align
 
 VAR="$(grep -n total ${ASSEMBLY_NAME}.tbl| cut -f1 -d:)"
 SIZE="$(sed -n $VAR\p ${ASSEMBLY_NAME}.tbl | sed -e 's/ /\t/g' | cut -f3)"
 
 srun \
-singularity exec --bind ~/:~/ ~/Software/tetools_latest.sif \
+singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 createRepeatLandscape.pl -div ${ASSEMBLY_NAME}.align.divsum -g ${SIZE} > ${ASSEMBLY_NAME}.align.divsum.html
