@@ -36,6 +36,7 @@ echo "=== 1/5. Indexing genome for RepeatModeler  ==============================
 mkdir -p "${OUT_DIR}/01_modeler"
 cd "${OUT_DIR}/01_modeler"
 ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
+
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 BuildDatabase -name ${ASSEMBLY_NAME} ${ASSEMBLY_NAME}.fa
 
@@ -51,10 +52,13 @@ echo "=== 3/5. Combining repeats library  ======================================
 
 mkdir -p "${OUT_DIR}/02_libraries"
 cd "${OUT_DIR}/02_libraries"
+
+#extract a species-specific FASTA library from the installed libraries
 srun \
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} --pwd /opt/RepeatMasker/Libraries/ $TET_SIF \
 famdb.py -i RepeatMaskerLib.h5 families --format fasta_name --include-class-in-name --ancestors --descendants "${SPECIES_NAME}" > ${ASSEMBLY_NAME}-rm.fa
 
+#combine libraries
 cat ${ASSEMBLY_NAME}-rm.fa "${OUT_DIR}/01_modeler/${ASSEMBLY_NAME}" > "${ASSEMBLY_NAME}_combined.fa"
 
 
@@ -63,6 +67,7 @@ echo "=== 4/5. Starting RepeatMasker  ==========================================
 mkdir -p "${OUT_DIR}/03_masker"
 cd "${OUT_DIR}/03_masker"
 ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
+
 srun \
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}-rm.fa" ${ASSEMBLY_NAME}.fa
