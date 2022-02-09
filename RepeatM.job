@@ -50,7 +50,7 @@ singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
 RepeatModeler -database ${ASSEMBLY_NAME} -pa ${SLURM_CPUS_PER_TASK} -LTRStruct
 
 
-echo "=== 3/5. Combining repeats libraries...  ==============================================="
+echo "=== 3/5. Combining repeats libraries...  =============================================="
 
 mkdir -p "${OUT_DIR}/02_libraries"
 cd "${OUT_DIR}/02_libraries"
