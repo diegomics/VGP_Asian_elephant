@@ -1,5 +1,4 @@
 # Proceedings related to mEleMax1 genome analysis
-:construction: Under construction! :construction:
 
 ## Annotation and masking of repeats present in the genome:
 1) Set singularity container:
