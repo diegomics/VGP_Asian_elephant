@@ -1,36 +1,14 @@
 #!/bin/bash
 
-## Full installation ###########################
-#cd ~/Software/
-#module load singularity
-#singularity pull docker://dfam/tetools:latest
-################################################
-
 #SBATCH -J RepeatM
-#SBATCH -o ~/Elephant_project/mEleMax1/repeat/%x.%j.out
-#SBATCH -e ~/Elephant_project/mEleMax1/repeat/%x.%j.err
 
 #SBATCH --mail-type=END,FAIL
-#SBATCH --mail-user=..@..
 
-#SBATCH --partition=begendiv,main
-#SBATCH --qos=standard
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=48G
 #SBATCH --time=3-00:00:00
 
 module load singularity
-
-
-
-## Only change these: ###################################################
-OUT_DIR="~/Elephant_project/mEleMax1/repeat"
-ASSEMBLY="~/Elephant_project/mEleMax1/intermediates/bionano/l2/l2_s1.fa"
-ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
-BIND_DIR="~/"
-TET_SIF="~/Software/tetools_latest.sif"
-SPECIES_NAME='Elephas maximus'
-#########################################################################
 
 
 echo "=== 1/5. Indexing genome for RepeatModeler...  ======================================="
