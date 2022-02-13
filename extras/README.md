@@ -4,6 +4,7 @@
 ## Runnning the annotation and masking of repeats that are present in the genome:
 1) Set singularity container:
 ```bash
+cd ~/VGP_Asian_elephant/extras
 bash install_repeat_dependencies.sh
 ```
 2) Edit `repeat_variables.cnf` file with the respective paths, values and parameters.
