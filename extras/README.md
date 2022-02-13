@@ -1,7 +1,7 @@
 # Proceedings related to mEleMax1 genome analysis
 :construction: Under construction! :construction:
 
-## Runnning the annotation and masking of repeats that are present in the genome:
+## Annotation and masking of repeats present in the genome:
 1) Set singularity container:
 ```bash
 cd ~/VGP_Asian_elephant/extras
