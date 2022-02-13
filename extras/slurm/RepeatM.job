@@ -10,6 +10,8 @@
 
 module load singularity
 
+export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+
 
 echo "=== 1/5. Indexing genome for RepeatModeler...  ======================================="
 
