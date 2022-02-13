@@ -3,6 +3,13 @@
 export OUT_DIR="~/Elephant_project/mEleMax1/repeat"
 export ASSEMBLY="~/Elephant_project/mEleMax1/intermediates/bionano/l2/l2_s1.fa"
 export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+export SPECIES_NAME='Elephas maximus'
+
+# singularity-specific variables
 export BIND_DIR="~/"
 export TET_SIF="~/Software/tetools_latest.sif"
-export SPECIES_NAME='Elephas maximus'
+
+# slurm-specific variables
+export USER_MAIL=""
+export PARTITION=""
+export QUEUE=""
