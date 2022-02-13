@@ -1,5 +1,3 @@
-# Proceedings related to mEleMax1 genome analysis
-
 ## Annotation and masking of repeats present in the genome:
 1) Set singularity container:
 ```bash
