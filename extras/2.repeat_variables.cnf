@@ -10,6 +10,6 @@ export BIND_DIR="~/"
 export TET_SIF="~/Software/tetools_latest.sif"
 
 # slurm-specific variables
-export USER_MAIL=""
-export PARTITION=""
-export QUEUE=""
+export USER_MAIL='user@mail.de'
+export PARTITION='begendiv,main'
+export QUEUE="standard"
