@@ -5,7 +5,4 @@ cd ~/VGP_Asian_elephant/extras
 bash 1.install_repeat_dependencies.sh
 ```
 2) Edit `2.repeat_variables.cnf` file with the respective paths, values and parameters.
-3) Run the pipeline:
-```bash
-bash 3.Run_RepeatM.sh
-```
+3) Run the pipeline: `bash 3.Run_RepeatM.sh`
