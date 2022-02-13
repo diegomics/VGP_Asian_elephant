@@ -1,4 +1,4 @@
-# Proceedings related to mEleMax1 genome
+# Proceedings related to mEleMax1 genome analysis
 :construction: Under construction! :construction:
 
 ## Runnning the annotation and masking of repeats that are present in the genome:
