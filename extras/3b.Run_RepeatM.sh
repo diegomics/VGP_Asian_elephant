@@ -41,7 +41,7 @@ cd "${OUT_DIR}/03_masker"
 ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
 
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} $TET_SIF \
-RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}-combined.fa" ${ASSEMBLY_NAME}.fa
+RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}_combined.fa" ${ASSEMBLY_NAME}.fa
 
 
 echo "=== 5/5. Plotting results...  ========================================================"
