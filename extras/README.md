@@ -8,4 +8,5 @@ bash 1.install_repeat_dependencies.sh
 3) Run the pipeline.
 
 . Option A: using slurm with: `bash 3.Run_RepeatM_slurm.sh`
+
 . Option B: in a single machine (no slurm): `bash 3.Run_RepeatM.sh`
