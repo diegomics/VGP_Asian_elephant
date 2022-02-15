@@ -6,5 +6,6 @@ bash 1.install_repeat_dependencies.sh
 ```
 2) Edit `2.repeat_variables.cnf` file with the respective paths, values and parameters.
 3) Run the pipeline.
-.Option A: using slurm with: `bash 3.Run_RepeatM_slurm.sh`
-.Option B: in a single machine (no slurm): `bash 3.Run_RepeatM.sh`
+
+. Option A: using slurm with: `bash 3.Run_RepeatM_slurm.sh`
+. Option B: in a single machine (no slurm): `bash 3.Run_RepeatM.sh`
