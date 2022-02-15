@@ -9,4 +9,4 @@ bash 1.install_repeat_dependencies.sh
 
 . Option A: using slurm with: `bash 3aRun_RepeatM_slurm.sh`
 
-. Option B: in a single machine (no slurm): `bash 3b.Run_RepeatM.sh`
+. Option B: in a single machine (no slurm) using 12 cpus and 48 Gb of RAM: `nohup bash 3b.Run_RepeatM.sh 2>&1 &`
