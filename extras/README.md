@@ -1,5 +1,5 @@
 ## Annotation and masking of repeats in the genome
-🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷
+🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷
 
 1) Set singularity container:
 ```bash
