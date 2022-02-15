@@ -1,4 +1,6 @@
-## Annotation and masking of repeats in the genome:
+## Annotation and masking of repeats in the genome
+🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷
+
 1) Set singularity container:
 ```bash
 cd ~/VGP_Asian_elephant/extras
