@@ -1,7 +1,8 @@
-# === STEP 0/12: Get variables & create folder  ======================
+# === STEP 0/12: Get variables & create folders  ======================
 
 source arima.cnf
 mkdir -p "${OUT_DIR}/idx"
+mkdir -p ${TMPDIR}
 
 
 # === STEP 1/12: Reference index  ====================================
