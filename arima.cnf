@@ -1,5 +1,8 @@
 SCAFFOLDS="/Elephant_project/mEleMax1/intermediates/yahs/l2_s2/yahs.out_scaffolds_final.fa"
-NAME=$(basename $SCAFFOLDS .${SCAFFOLDS##*.})
-OUT_DIR="/Elephant_project/mEleMax1/intermediates/arima_pipeline/l2_s2/yahs"
+
 HIC_FQ_1="/Elephant_project/mEleMax1/genomic_data/arima/mEleMax1_S9_L003_R1_001.fastq.gz"
 HIC_FQ_2="/Elephant_project/mEleMax1/genomic_data/arima/mEleMax1_S9_L003_R2_001.fastq.gz"
+
+OUT_DIR="/Elephant_project/mEleMax1/intermediates/arima_pipeline/l2_s2/yahs"
+
+export TMPDIR="/scratch/ddepanis/tmp"
