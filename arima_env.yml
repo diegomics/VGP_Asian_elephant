@@ -1,6 +1,10 @@
-name: RESEQ_env
+name: ARIMA_env
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
+  - bwa-mem2=2.2.1
+  - bedtools=2.30.0
+  - samtools=1.14
+  - picard=2.26.10
