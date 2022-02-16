@@ -16,13 +16,13 @@ export TMPDIR="/scratch/ddepanis/tmp"
 
 
 echo
-echo "== 4/13. Making BWA alignment of reverse HiC reads ===="
+echo "== 5/11. Making BWA alignment of reverse HiC reads ===="
 cd $OUT_DIR
 bwa mem -t 16 $OUT_DIR/idx/$NAME $HIC_FQ_2 | samtools view -@ 8 -b > ${OUT_DIR}/${NAME}_HiCreads_2.bam
 echo "== Done! ===="
 
 echo
-echo "== 6/13. Filtering 5' end on reverse HiC reads ===="
+echo "== 6/11. Filtering 5' end on reverse HiC reads ===="
 cd $OUT_DIR
 samtools view -@ 12 -h ${OUT_DIR}/${NAME}_HiCreads_2.bam | perl ${ARIMA_MAPPING_DIR}/filter_five_end.pl | samtools view -@ 12 -b > ${OUT_DIR}/${NAME}_HiCreads.filtered_2.bam
 echo "== Done! ===="
