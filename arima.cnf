@@ -1,12 +1,11 @@
+# arima pipeline variables
 export ASSEMBLY="/path/to/assembly.fasta"
-
 export HIC_FQ_1="/path/to/forward_reads"
 export HIC_FQ_2="/path/to/reverse_reads"
+export OUT_DIR="/path/to/arima_pipeline/out_dir"
+export TMPDIR="/path/to/tmp_dir"
 
-export OUT_DIR="/path/to/arima_pipeline/assembly_test"
-
-export TMPDIR="/scratch/ddepanis/tmp"
-
-export USER_MAIL=
-export PARTITION=
-export QUEUE=
+# slurm-specific variables
+export USER_MAIL='user@mail.de'
+export PARTITION='begendiv,main'
+export QUEUE="standard"
