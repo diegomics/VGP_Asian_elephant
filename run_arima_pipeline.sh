@@ -1,6 +1,7 @@
 # === STEP 0/12: Get variables & create folders  ======================
 
 source arima.cnf
+export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
 mkdir -p "${OUT_DIR}/idx"
 mkdir -p ${TMPDIR}
 
