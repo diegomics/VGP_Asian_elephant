@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH -J arima.index
+#SBATCH --mail-type=END,FAIL
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=48G
+#SBATCH --time=6:00:00
+
+export PATH="${CONDA_BIN_DIR}:${PATH}"
+source activate ARIMA_env
+module load Boost/1.67.0-foss-2018b
+
+echo "== 10/12. Indexing new BAM ===="
+cd $OUT_DIR
+samtools index "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam"
+echo "== Done! ===="
