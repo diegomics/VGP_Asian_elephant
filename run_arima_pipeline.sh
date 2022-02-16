@@ -74,5 +74,5 @@ STATS_JOB_ID=$(echo $STATS_JOB | cut -d ' ' -f4)
 
 # === STEP 12/12: Remove intermediate files ==========================
 
-REMOVE_JOB=$(sbatch --dependency=afterok:${STATS_JOB_ID} --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/%x.%j.out --error=${OUT_DIR}/%x.%j.err slurm/arima.remove.job)
-REMOVE_JOB_ID=$(echo $REMOVE_JOB | cut -d ' ' -f4)
+#REMOVE_JOB=$(sbatch --dependency=afterok:${STATS_JOB_ID} --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/%x.%j.out --error=${OUT_DIR}/%x.%j.err slurm/arima.remove.job)
+#REMOVE_JOB_ID=$(echo $REMOVE_JOB | cut -d ' ' -f4)
