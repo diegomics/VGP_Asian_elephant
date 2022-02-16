@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH -J arima.index1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=192G
+#SBATCH --time=1-00:00:00
+
+export PATH="${CONDA_BIN_DIR}:${PATH}"
+source activate ARIMA_env
+module load Boost/1.67.0-foss-2018b
+
+echo
+echo "== 9/12. Removing duplicates ===="
+cd $OUT_DIR
+java -Xmx192G -XX:-UseGCOverheadLimit -jar $PICARD_JAR MarkDuplicates INPUT="${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.semifinal.bam" OUTPUT="${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam" METRICS_FILE="${OUT_DIR}/metrics.${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.txt" TMP_DIR=$TMPDIR ASSUME_SORTED=TRUE VALIDATION_STRINGENCY=LENIENT REMOVE_DUPLICATES=TRUE
+echo "The file ${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam contains the paired, 5'-filtered, and duplicated-removed HiC reads mapped to the scaffolds"
+echo "== Done! ===="
