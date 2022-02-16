@@ -1,0 +1,22 @@
+
+#!/bin/bash
+
+#SBATCH -J arima.map1
+
+#SBATCH --mail-type=END,FAIL
+
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=48G
+#SBATCH --time=2-00:00:00
+
+echo
+echo "== 3/11. Making BWA alignment of forward HiC reads ===="
+cd $OUT_DIR
+bwa-mem2 mem -t 16 $OUT_DIR/idx/$NAME $HIC_FQ_1 | samtools view -@ 8 -b > ${OUT_DIR}/${NAME}_HiCreads_1.bam
+echo "== Done! ===="
+
+echo
+echo "== 5/11. Filtering 5' end on forward HiC reads ===="
+cd $OUT_DIR
+samtools view -@ 12 -h ${OUT_DIR}/${NAME}_HiCreads_1.bam | perl ${ARIMA_MAPPING_DIR}/filter_five_end.pl | samtools view -@ 12 -b > ${OUT_DIR}/${NAME}_HiCreads.filtered_1.bam
+echo "== Done! ===="
