@@ -10,5 +10,9 @@ export USER_MAIL='user@mail.de'
 export PARTITION='begendiv,main'
 export QUEUE="standard"
 
-# conda-specific variavle
-export CONDA_BIN_DIR="/path/to/anaconda3/bin"
+# conda-specific variables
+export CONDA_BIN_DIR="/path/to/conda/bin"
+export PICARD_JAR='/path/to/conda/envs/ARIMA_env/share/picard-2.26.10-0/picard.jar'
+
+# arima tools dir
+export ARIMA_TOOLS_DIR="/scratch/ddepanis/Software/ARIMA_mapping_pipeline"
