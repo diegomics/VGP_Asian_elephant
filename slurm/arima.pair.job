@@ -2,7 +2,7 @@
 
 #SBATCH -J arima.pair
 #SBATCH --mail-type=END,FAIL
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=24
 #SBATCH --mem=208G
 #SBATCH --time=1-00:00:00
 
