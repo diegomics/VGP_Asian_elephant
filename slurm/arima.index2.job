@@ -6,9 +6,12 @@
 #SBATCH --mem=48G
 #SBATCH --time=12:00:00
 
+export PATH="${CONDA_BIN_DIR}:${PATH}"
+source activate ARIMA_env
+module load Boost/1.67.0-foss-2018b
 
 echo
 echo "== 2/11. Making BWA index ===="
-cd $OUT_DIR/idx
-bwa-mem2 index -p $NAME $SCAFFOLDS
+cd "${OUT_DIR}/idx"
+bwa-mem2 index -p $ASSEMBLY_NAME "${ASSEMBLY_NAME}.fa"
 echo "== Done! ===="
