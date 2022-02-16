@@ -12,5 +12,5 @@ module load Boost/1.67.0-foss-2018b
 
 echo "== 5/12. Filtering 5' end on forward HiC reads ===="
 cd $OUT_DIR
-samtools view -@ 2 -h "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads_1.bam" | perl ${ARIMA_MAPPING_DIR}/filter_five_end.pl | samtools view -@ 2 -b > ${OUT_DIR}/${NAME}_HiCreads.filtered_1.bam
+samtools view -@ 2 -h "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads_1.bam" | perl "${ARIMA_TOOLS_DIR}/filter_five_end.pl" | samtools view -@ 2 -b > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered_1.bam"
 echo "== Done! ===="
