@@ -10,7 +10,7 @@ export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
 module load Boost/1.67.0-foss-2018b
 
-echo "== 7/13. Pairing reads and quality filtering ===="
+echo "== 7/12. Pairing reads ===="
 cd $OUT_DIR
 perl "${ARIMA_TOOLS_DIR}/two_read_bam_combiner.pl" "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered_1.bam" "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered_2.bam" $SAMTOOLS_BIN 10 | samtools view -@ 12 -b -t "${OUT_DIR}/idx/${ASSEMBLY_NAME}.fa.fai" | samtools sort -@ 12 -o "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.bam"
 echo "== Done! ===="
