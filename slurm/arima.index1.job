@@ -6,16 +6,13 @@
 
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=48G
-#SBATCH --time=12:00:00
-
-
-ASSEMBLY_NAME=$(basename $SCAFFOLDS .${SCAFFOLDS##*.})
+#SBATCH --time=2:00:00
 
 echo
 echo "(This is the Arima Genomics' mapping pipeline starting...)"
 
 echo
-echo "== 1/11. Making reference index ===="
+echo "== 1/12. Making reference index ===="
 cd "${OUT_DIR}/idx"
 ln -s $ASSEMBLY "${ASSEMBLY_NAME}.fa"
 samtools faidx "${ASSEMBLY_NAME}.fa"
