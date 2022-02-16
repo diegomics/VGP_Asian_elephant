@@ -5,8 +5,8 @@
 #SBATCH --mail-type=END,FAIL
 
 #SBATCH --cpus-per-task=24
-#SBATCH --mem=48G
-#SBATCH --time=2-00:00:00
+#SBATCH --mem=64G
+#SBATCH --time=1-00:00:00
 
 
 export PATH="/scratch/ddepanis/Software/anaconda3/bin:${PATH}"
@@ -19,10 +19,4 @@ echo
 echo "== 5/11. Making BWA alignment of reverse HiC reads ===="
 cd $OUT_DIR
 bwa mem -t 16 $OUT_DIR/idx/$NAME $HIC_FQ_2 | samtools view -@ 8 -b > ${OUT_DIR}/${NAME}_HiCreads_2.bam
-echo "== Done! ===="
-
-echo
-echo "== 6/11. Filtering 5' end on reverse HiC reads ===="
-cd $OUT_DIR
-samtools view -@ 12 -h ${OUT_DIR}/${NAME}_HiCreads_2.bam | perl ${ARIMA_MAPPING_DIR}/filter_five_end.pl | samtools view -@ 12 -b > ${OUT_DIR}/${NAME}_HiCreads.filtered_2.bam
 echo "== Done! ===="
