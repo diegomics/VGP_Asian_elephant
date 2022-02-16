@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J arima.index
+#SBATCH -J arima.index1
 
 #SBATCH --mail-type=END,FAIL
 
