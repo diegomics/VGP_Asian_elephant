@@ -1,8 +1,12 @@
-ASSEMBLY="/Elephant_project/mEleMax1/intermediates/yahs/l2_s2/yahs.out_scaffolds_final.fa"
+export ASSEMBLY="/path/to/assembly.fasta"
 
-HIC_FQ_1="/Elephant_project/mEleMax1/genomic_data/arima/mEleMax1_S9_L003_R1_001.fastq.gz"
-HIC_FQ_2="/Elephant_project/mEleMax1/genomic_data/arima/mEleMax1_S9_L003_R2_001.fastq.gz"
+export HIC_FQ_1="/path/to/forward_reads"
+export HIC_FQ_2="/path/to/reverse_reads"
 
-OUT_DIR="/Elephant_project/mEleMax1/intermediates/arima_pipeline/yahs_test"
+export OUT_DIR="/path/to/arima_pipeline/assembly_test"
 
 export TMPDIR="/scratch/ddepanis/tmp"
+
+export USER_MAIL=
+export PARTITION=
+export QUEUE=
