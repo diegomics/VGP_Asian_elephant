@@ -3,6 +3,6 @@ ASSEMBLY="/Elephant_project/mEleMax1/intermediates/yahs/l2_s2/yahs.out_scaffolds
 HIC_FQ_1="/Elephant_project/mEleMax1/genomic_data/arima/mEleMax1_S9_L003_R1_001.fastq.gz"
 HIC_FQ_2="/Elephant_project/mEleMax1/genomic_data/arima/mEleMax1_S9_L003_R2_001.fastq.gz"
 
-OUT_DIR="/Elephant_project/mEleMax1/intermediates/arima_pipeline/l2_s2/yahs"
+OUT_DIR="/Elephant_project/mEleMax1/intermediates/arima_pipeline"
 
 export TMPDIR="/scratch/ddepanis/tmp"
