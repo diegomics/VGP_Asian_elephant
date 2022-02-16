@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH -J arima.quality
+#SBATCH --mail-type=END,FAIL
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=192G
+#SBATCH --time=1-00:00:00
+
+export PATH="${CONDA_BIN_DIR}:${PATH}"
+source activate ARIMA_env
+module load Boost/1.67.0-foss-2018b
+
+echo "== 8/13. Pairing reads and quality filtering ===="
+cd $OUT_DIR
+java -Xmx192G -jar $PICARD_JAR AddOrReplaceReadGroups INPUT="${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.bam" OUTPUT="${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.semifinal.bam" ID=$ASSEMBLY_NAME LB=$ASSEMBLY_NAME SM=$ASSEMBLY_NAME PL=ILLUMINA PU=none
+echo "== Done! ===="
