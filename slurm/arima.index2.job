@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH -J arima.index2
+
+#SBATCH --mail-type=END,FAIL
+
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=48G
+#SBATCH --time=12:00:00
+
+
+NAME=$(basename $SCAFFOLDS .${SCAFFOLDS##*.})
+
+
+echo
+echo "== 2/11. Making BWA index ===="
+mkdir -p $OUT_DIR/idx
+cd $OUT_DIR/idx
+bwa-mem2 index -p $NAME $SCAFFOLDS
+echo "== Done! ===="
