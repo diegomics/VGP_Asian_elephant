@@ -18,10 +18,3 @@ echo
 echo "== 1/11. Making reference index ===="
 samtools faidx $SCAFFOLDS
 echo "== Done! ===="
-
-echo
-echo "== 2/11. Making BWA index ===="
-mkdir -p $OUT_DIR/idx
-cd $OUT_DIR/idx
-bwa-mem2 index -p $NAME $SCAFFOLDS
-echo "== Done! ===="
