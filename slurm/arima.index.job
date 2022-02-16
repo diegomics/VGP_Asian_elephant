@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#SBATCH -J arima.index
+
+#SBATCH --mail-type=END,FAIL
+
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=48G
+#SBATCH --time=12:00:00
+
+echo
+echo "(This is the Arima Genomics' mapping pipeline starting...)"
+
+echo
+echo "== 1/11. Making reference index ===="
+samtools faidx $SCAFFOLDS
+echo "== Done! ===="
+
+echo
+echo "== 2/11. Making BWA index ===="
+mkdir -p $OUT_DIR/idx
+cd $OUT_DIR/idx
+bwa-mem2 index -p $NAME $SCAFFOLDS
+echo "== Done! ===="
