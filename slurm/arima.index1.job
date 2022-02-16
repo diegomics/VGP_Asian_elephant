@@ -9,12 +9,14 @@
 #SBATCH --time=12:00:00
 
 
-NAME=$(basename $SCAFFOLDS .${SCAFFOLDS##*.})
+ASSEMBLY_NAME=$(basename $SCAFFOLDS .${SCAFFOLDS##*.})
 
 echo
 echo "(This is the Arima Genomics' mapping pipeline starting...)"
 
 echo
 echo "== 1/11. Making reference index ===="
-samtools faidx $SCAFFOLDS
+cd "${OUT_DIR}/idx"
+ln -s $ASSEMBLY "${ASSEMBLY_NAME}.fa"
+samtools faidx "${ASSEMBLY_NAME}.fa"
 echo "== Done! ===="
