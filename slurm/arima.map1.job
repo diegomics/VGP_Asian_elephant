@@ -11,7 +11,7 @@ source activate ARIMA_env
 module load Boost/1.67.0-foss-2018b
 
 echo
-echo "== 3/11. Making BWA alignment of forward HiC reads ===="
+echo "== 3/12. Making BWA alignment of forward HiC reads ===="
 cd $OUT_DIR
 bwa-mem2 mem -t 16 "${OUT_DIR}/idx/${ASSEMBLY_NAME}" $HIC_FQ_1 | samtools view -@ 8 -b > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads_1.bam"
 echo "== Done! ===="
