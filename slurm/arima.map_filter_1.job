@@ -15,7 +15,7 @@ bwa-mem2 mem -t 16 $OUT_DIR/idx/$NAME $HIC_FQ_1 | samtools view -@ 8 -b > ${OUT_
 echo "== Done! ===="
 
 echo
-echo "== 5/11. Filtering 5' end on forward HiC reads ===="
+echo "== 4/11. Filtering 5' end on forward HiC reads ===="
 cd $OUT_DIR
 samtools view -@ 12 -h ${OUT_DIR}/${NAME}_HiCreads_1.bam | perl ${ARIMA_MAPPING_DIR}/filter_five_end.pl | samtools view -@ 12 -b > ${OUT_DIR}/${NAME}_HiCreads.filtered_1.bam
 echo "== Done! ===="
