@@ -9,3 +9,6 @@ export TMPDIR="/path/to/tmp_dir"
 export USER_MAIL='user@mail.de'
 export PARTITION='begendiv,main'
 export QUEUE="standard"
+
+# conda-specific variavle
+export CONDA_BIN_DIR="/path/to/anaconda3/bin"
