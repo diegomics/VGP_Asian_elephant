@@ -8,6 +8,9 @@
 #SBATCH --mem=48G
 #SBATCH --time=12:00:00
 
+
+NAME=$(basename $SCAFFOLDS .${SCAFFOLDS##*.})
+
 echo
 echo "(This is the Arima Genomics' mapping pipeline starting...)"
 
