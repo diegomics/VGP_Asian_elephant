@@ -1,7 +1,5 @@
 echo
-echo "* building singularity container in '~/Software'..."
+echo "* building singularity container in '/VGP_Asian_elephant/extras/'..."
 echo
-mkdir -p ~/Software
-cd ~/Software
 module load singularity
 singularity pull docker://dfam/tetools:latest
