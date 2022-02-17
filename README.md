@@ -27,7 +27,7 @@ The arima_pipeline workflow uses up to 24 CPUs and 192 GB in certain steps
 
 . `bash install_arima_dependencies.sh`
 
-. Edit the file `arima.cnf`
+. Edit the file `arima.cnf` with required data
 
 . run the workflow with `bash run_arima_pipeline.sh`
 
