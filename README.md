@@ -16,7 +16,13 @@ git clone https://github.com/diegomics/VGP_Asian_elephant
 cd VGP_Asian_elephant
 ```
 
-### Arima_pipeline workflow
+### _Hifiasm_
+
+### _purge_dups workflow_
+
+### _bionano worflow_
+
+### _Arima_pipeline workflow_
 The arima_pipeline workflow uses up to 24 CPUs and 192 GB in certain steps
 
 . `bash install_arima_dependencies.sh`
@@ -24,3 +30,5 @@ The arima_pipeline workflow uses up to 24 CPUs and 192 GB in certain steps
 . Edit the file `arima.cnf`
 
 . run the workflow with `bash run_arima_pipeline.sh`
+
+### _salsa workflow_
