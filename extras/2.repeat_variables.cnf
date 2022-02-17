@@ -6,7 +6,7 @@ export SPECIES_NAME='Elephas maximus'
 
 # singularity-specific variables
 export BIND_DIR="~/"
-export TET_SIF="~/Software/tetools_latest.sif"
+export TET_SIF="/VGP_Asian_elephant/extras/tetools_latest.sif"
 
 # slurm-specific variables
 export USER_MAIL='user@mail.de'
