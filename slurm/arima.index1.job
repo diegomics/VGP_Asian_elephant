@@ -15,8 +15,10 @@ echo "(This is the Arima Genomics' mapping pipeline starting...)"
 
 echo
 echo "== 1/12. Making reference index ===="
+
 cd "${OUT_DIR}/idx"
 ln -s $ASSEMBLY "${ASSEMBLY_NAME}.fa"
 srun \
 samtools faidx "${ASSEMBLY_NAME}.fa"
+
 echo "== Done! ===="
