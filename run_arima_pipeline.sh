@@ -68,7 +68,7 @@ INDEX_JOB_ID=$(echo $INDEX_JOB | cut -d ' ' -f4)
 
 # === STEP 11/12: Make stats =========================================
 
-STATS_JOB=$(sbatch --dependency=afterok:${INDEX_JOB_ID} --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/%x.%j.out --error=${OUT_DIR}/%x.%j.err slurm/arima.index.job)
+STATS_JOB=$(sbatch --dependency=afterok:${INDEX_JOB_ID} --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/%x.%j.out --error=${OUT_DIR}/%x.%j.err slurm/arima.stats.job)
 STATS_JOB_ID=$(echo $STATS_JOB | cut -d ' ' -f4)
 
 
