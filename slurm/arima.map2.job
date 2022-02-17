@@ -8,10 +8,12 @@
 
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
-module load Boost/1.67.0-foss-2018b
 
 echo
 echo "== 4/12. Making BWA alignment of reverse HiC reads ===="
+
 cd $OUT_DIR
+srun \
 bwa-mem2 mem -t 16 "${OUT_DIR}/idx/${ASSEMBLY_NAME}" $HIC_FQ_2 | samtools view -@ 8 -b > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads_2.bam"
+
 echo "== Done! ===="
