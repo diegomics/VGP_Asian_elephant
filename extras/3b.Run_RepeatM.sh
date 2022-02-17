@@ -31,7 +31,7 @@ singularity exec --bind ${BIND_DIR}:${BIND_DIR} --pwd /opt/RepeatMasker/Librarie
 famdb.py -i RepeatMaskerLib.h5 families --format fasta_name --include-class-in-name --ancestors --descendants "${SPECIES_NAME}" > ${ASSEMBLY_NAME}-rm.fa
 
 #combine libraries
-cat ${ASSEMBLY_NAME}-rm.fa "${OUT_DIR}/01_modeler/${ASSEMBLY_NAME}" > "${ASSEMBLY_NAME}_combined.fa"
+cat ${ASSEMBLY_NAME}-rm.fa "${OUT_DIR}/01_modeler/${ASSEMBLY_NAME}-families.fa" > "${ASSEMBLY_NAME}_combined.fa"
 
 
 echo "=== 4/5. Starting RepeatMasker...  ==================================================="
