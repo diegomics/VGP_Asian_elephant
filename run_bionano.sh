@@ -6,4 +6,4 @@ cp "${BIONANO_DIR}/*hybrid*" .
 ln -s $ASSEMBLY "${ASSEMBLY_NAME}.fasta"
 ln -s $CMAP "${CMAP_NAME}.cmap"
 
-bash _submit_hybrid_scaffold_dle1_3.3.sh
+bash submit_hybrid_scaffold_dle1_3.3.sh
