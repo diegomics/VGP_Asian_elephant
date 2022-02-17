@@ -15,3 +15,6 @@
 git clone https://github.com/diegomics/VGP_Asian_elephant
 cd VGP_Asian_elephant
 bash install_dependencies.sh
+
+
+The arima_pipeline workflow uses up to 24 CPUs and 192 GB in certain steps
