@@ -29,6 +29,6 @@ The arima_pipeline workflow uses up to 24 CPUs and 192 GB in certain steps
 
 . Edit the file `arima.cnf` with required data
 
-. run the workflow with `bash run_arima_pipeline.sh`
+. Run the workflow with `bash run_arima_pipeline.sh`
 
 ### _salsa workflow_
