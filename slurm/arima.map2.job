@@ -3,8 +3,8 @@
 #SBATCH -J arima.map2
 #SBATCH --mail-type=END,FAIL
 #SBATCH --cpus-per-task=24
-#SBATCH --mem=64G
-#SBATCH --time=1-00:00:00
+#SBATCH --mem=32G
+#SBATCH --time=08:00:00
 
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
