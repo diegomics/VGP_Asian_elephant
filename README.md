@@ -22,8 +22,8 @@ cd VGP_Asian_elephant
 
 ### _bionano worflow_
 
-### _[Arima_pipeline](https://github.com/ArimaGenomics/mapping_pipeline) workflow_
-The arima_pipeline workflow uses up to 24 CPUs and 192 GB in certain steps
+### _[Arima_mapping](https://github.com/ArimaGenomics/mapping_pipeline) workflow_
+The Arima workflow uses up to 24 CPUs and 192 GB in certain steps
 
 . `bash install_arima_dependencies.sh`
 
