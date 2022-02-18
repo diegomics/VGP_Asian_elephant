@@ -1,4 +1,17 @@
-OUT_DIR
+export BIONANO_DIR=""
+export OUT_DIR=""
+export ASSEMBLY=""
+export CMAP_FILE=""
+
+
+# slurm-specific variables
+export USER_MAIL='user@mail.de'
+export PARTITION='begendiv,main'
+export QUEUE="standard"
+export CPUS=48
+export MEM=960G
+export MAX_TIME=5-00:00:00
+
 ASSEMBLY_NAME
-BIONANO_DIR
-CMAP
+
+
