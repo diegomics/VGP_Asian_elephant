@@ -20,7 +20,7 @@ cd VGP_Asian_elephant
 
 ### _purge_dups workflow_
 
-### _bionano worflow_
+### _bionano worflow_ :construction:
 
 ### _[Arima_mapping](https://github.com/ArimaGenomics/mapping_pipeline) workflow_
 The Arima workflow uses up to 24 CPUs and 192 GB in certain steps
