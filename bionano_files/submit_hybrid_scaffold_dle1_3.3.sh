@@ -17,7 +17,7 @@ fi
 
 cpus=48
 mem=960g
-partition=begendiv
+partition=be
 name=$1
 script="/scratch/ddepanis/Software/bionano/hybrid_scaffold_3.3.sh"
 #args="$1 DLE1 $VGP_PIPELINE/bionano/hybridScaffold_DLE1_HiC_config_3.3.xml"
@@ -27,6 +27,7 @@ walltime=7-00:00:00
 mkdir -p logs
 log=$PWD/logs/$name.%A_%a.log
 
-echo "\
-sbatch --partition=$partition  --qos=standard --cpus-per-task=$cpus --job-name=$name --mem=$mem --time=$walltime --error=$log --output=$log $script $args"
+
 sbatch --partition=$partition  --qos=standard --cpus-per-task=$cpus --job-name=$name --mem=$mem --time=$walltime --error=$log --output=$log $script $args
+
+sbatch --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.out --error=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.err slurm/arima.index1.job)
