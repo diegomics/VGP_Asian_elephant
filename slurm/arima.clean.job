@@ -1,1 +1,13 @@
 
+#!/bin/bash
+
+#SBATCH -J arima.clean
+#SBATCH --mail-type=END,FAIL
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1G
+#SBATCH --time=01:00:00
+
+
+echo
+echo "== 14/14. Removing intermediate files  ===="
+cd 
