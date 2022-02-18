@@ -2,9 +2,9 @@
 
 #SBATCH -J arima.index
 #SBATCH --mail-type=END,FAIL
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=2G
-#SBATCH --time=6:00:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1G
+#SBATCH --time=01:00:00
 
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
