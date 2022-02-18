@@ -31,4 +31,6 @@ The Arima workflow uses up to 24 CPUs and 192 GB in certain steps
 
 . Run the workflow with `bash run_arima_pipeline.sh`
 
+\*) For the Asian elephant genome, it takes <30 h to finish.
+
 ### _Salsa2 workflow_
