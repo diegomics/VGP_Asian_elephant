@@ -28,6 +28,6 @@ mkdir -p logs
 log=$PWD/logs/$name.%A_%a.log
 
 
-sbatch --partition=$partition  --qos=standard --cpus-per-task=$cpus --job-name=$name --mem=$mem --time=$walltime --error=$log --output=$log $script $args
+sbatch  --cpus-per-task=$cpus --job-name=$name --mem=$mem --time=$walltime $script $args
 
 sbatch --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.out --error=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.err slurm/arima.index1.job)
