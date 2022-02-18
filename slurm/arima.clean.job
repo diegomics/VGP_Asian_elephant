@@ -10,4 +10,5 @@
 
 echo
 echo "== 14/14. Removing intermediate files  ===="
-cd 
+cd $OUT_DIR
+
