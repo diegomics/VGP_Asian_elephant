@@ -14,9 +14,3 @@ echo "== 1/2. Converting BAM to BED ===="
 cd $OUT_DIR
 bamToBed -i "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam" > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bed"
 echo "== Done! ===="
-
-echo
-echo "== 2/2. Sorting BED by read name ===="
-cd $OUT_DIR
-sort -k 4 "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bed" > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.sorted.bed"
-echo "== Done! ===="
