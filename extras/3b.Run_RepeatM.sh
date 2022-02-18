@@ -1,6 +1,6 @@
 source 2.repeat_variables.cnf
 
-module load singularity
+$LOAD_SINGULARITY
 
 export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
 
