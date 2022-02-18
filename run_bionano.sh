@@ -2,6 +2,8 @@
 
 source bionano.cnf
 
+ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+
 mkdir -p "${OUT_DIR}/${ASSEMBLY_NAME}/std_logs"
 cd "${OUT_DIR}/${ASSEMBLY_NAME}"
 cp "${BIONANO_DIR}/*hybrid*" .
