@@ -1,6 +1,6 @@
 source bionano.cnf
 
-mkdir -p "${OUT_DIR}/${ASSEMBLY_NAME}"
+mkdir -p "${OUT_DIR}/${ASSEMBLY_NAME}/std_logs"
 cd "${OUT_DIR}/${ASSEMBLY_NAME}"
 cp "${BIONANO_DIR}/*hybrid*" .
 ln -s $ASSEMBLY "${ASSEMBLY_NAME}.fasta"
