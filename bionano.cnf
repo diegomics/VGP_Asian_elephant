@@ -1,7 +1,7 @@
-export BIONANO_DIR=""
-export OUT_DIR=""
-export ASSEMBLY=""
-export CMAP_FILE=""
+export BIONANO_DIR="/path/to/VGP_Asian_elephant/bionano_files"
+export OUT_DIR="/path/to/bionano_out_dir"
+export ASSEMBLY="/path/to/assembly_file"
+export CMAP_FILE="/path/to/cmap_file"
 
 
 # slurm-specific variables
@@ -11,7 +11,3 @@ export QUEUE="standard"
 export CPUS=48
 export MEM=960G
 export MAX_TIME=5-00:00:00
-
-ASSEMBLY_NAME
-
-
