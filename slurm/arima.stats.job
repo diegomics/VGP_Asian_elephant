@@ -2,13 +2,12 @@
 
 #SBATCH -J arima.stats
 #SBATCH --mail-type=END,FAIL
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=48G
-#SBATCH --time=2:00:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1G
+#SBATCH --time=01:00:00
 
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
-module load Boost/1.67.0-foss-2018b
 
 echo
 echo "== 11/12. Making stats  ===="
