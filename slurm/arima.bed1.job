@@ -10,7 +10,7 @@ export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
 
 echo
-echo "== 1/2. Converting BAM to BED ===="
+echo "== 13/14. Converting BAM to BED ===="
 cd $OUT_DIR
 bamToBed -i "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam" > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bed"
 echo "== Done! ===="
