@@ -54,6 +54,7 @@ srun \
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} "${INSTALLATION_DIR}/tetools_latest.sif" \
 RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}_combined.fa" ${ASSEMBLY_NAME}
 
+mv ${ASSEMBLY_NAME}.masked ${ASSEMBLY_NAME}.masked.fa
 
 echo "=== 5/5. Plotting results...  ========================================================"
 
