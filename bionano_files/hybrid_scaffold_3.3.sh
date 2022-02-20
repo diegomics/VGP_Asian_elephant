@@ -2,8 +2,8 @@
 
 name=$1
 ENZYME=$2
-BMAP=$ENZYME.cmap # DLE1.cmap
-ASM=asm.fasta	# ln -s to the asm.fasta
+BMAP=DL1.cmap
+ASM=asm.fasta
 CONFIG=$3
 RefAligner=$tools/bionano/Solve3.6.1_11162020/RefAligner/11442.11643rel/avx/RefAligner
 
