@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 #SBATCH -J arima.clean
