@@ -87,5 +87,3 @@ BED1_JOB_ID=$(echo $BED1_JOB | cut -d ' ' -f4)
 # === STEP 14/14: Sort .bed ==========================
 
 BED2_JOB=$(sbatch --dependency=afterok:${$BED1_JOB_ID} --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/std_logs/%x.%j.out --error=${OUT_DIR}/std_logs/%x.%j.err slurm/arima.bed2.job)
-BED2_JOB_ID=$(echo $BED2_JOB | cut -d ' ' -f4)
-
