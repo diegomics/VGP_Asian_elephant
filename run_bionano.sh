@@ -4,7 +4,7 @@ source bionano.cnf
 
 mkdir -p "${OUT_DIR}/${ASSEMBLY_NAME}/std_logs"
 cd "${OUT_DIR}/${ASSEMBLY_NAME}"
-cp ${BIONANO_DIR}/* .
+cp ${BIONANO_DIR}/hybrid* .
 chmod +x hybrid*
 ln -s $ASSEMBLY asm.fasta
 ln -s $CMAP_FILE DL1.cmap
