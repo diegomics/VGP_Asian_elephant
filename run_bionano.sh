@@ -19,5 +19,5 @@ sbatch --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --cpus-p
 BIONANO_JOB_ID=$(echo $BIONANO_JOB | cut -d ' ' -f4)
 
 # === STEP 2/:  ======================
-sbatch --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.out --error=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.err trimNs.job
+sbatch --dependency=afterok:${BIONANO_JOB} --mail-user=${USER_MAIL} --partition=${PARTITION} --qos=${QUEUE} --output=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.out --error=${OUT_DIR}/${ASSEMBLY_NAME}/std_logs/%x.%j.err trimNs.job
 
