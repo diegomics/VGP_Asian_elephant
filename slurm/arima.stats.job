@@ -10,7 +10,7 @@ export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate ARIMA_env
 
 echo
-echo "== 11/12. Making stats  ===="
+echo "== 11/14. Making stats  ===="
 cd $OUT_DIR
 perl "${ARIMA_TOOLS_DIR}/get_stats.pl" "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam" > "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam.stats"
 echo "The file ${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.FINAL.bam.stats contains total number of intra-conting / long-range intra-contig / inter-contig / read-pairs"
