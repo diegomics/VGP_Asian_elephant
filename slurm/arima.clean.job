@@ -16,3 +16,4 @@ rm "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered_1.bam"
 rm "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered_2.bam"
 rm "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.bam"
 rm "${OUT_DIR}/${ASSEMBLY_NAME}_HiCreads.filtered.semifinal.bam"
+rm -r idx
