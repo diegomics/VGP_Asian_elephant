@@ -31,6 +31,6 @@ The Arima workflow uses up to 24 CPUs and 192 GB in certain steps
 
 . Run the workflow with `bash run_arima_pipeline.sh`
 
-\*) For the Asian elephant genome, it takes <30 h to finish.
+\*) For the Asian elephant genome, it takes <30 h to produce the final sorted BAM (needed for pretextMap) and ~44 h to produce the final sorted BED (needed for salsa2 or yahs)
 
 ### _Salsa2 workflow_
