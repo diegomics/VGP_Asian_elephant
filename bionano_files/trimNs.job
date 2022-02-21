@@ -1,21 +1,19 @@
 #!/bin/bash
 
 #SBATCH -J trimNs
-
-#SBATCH --mail-type=FAIL,END
-
+#SBATCH --mail-type=END,FAIL
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=12G
 #SBATCH --time=1-00:00:00 
 
-cd 
-#cat mEleMax1_Saphyr_DLE1_3680720_bppAdjust_cmap_l3_108_purged_36_108_fa_NGScontigs_HYBRID_SCAFFOLD_NCBI.fasta > l3_combined.fa ; cat mEleMax1_Saphyr_DLE1_3680720_bppAdjust_cmap_l3_108_purged_36_108_fa_NGScontigs_HYBRID_SCAFFOLD_NOT_SCAFFOLDED.fasta >> l3_combined.fa
+cd ${OUT_DIR}/${ASSEMBLY_NAME}/${ASSEMBLY_NAME}/hybrid_scaffolds
 
-cd /scratch/ddepanis/Software/bionano/trimNs
+cat *NGScontigs_HYBRID_SCAFFOLD_NCBI.fasta > bionano_combined.fa ; cat *NGScontigs_HYBRID_SCAFFOLD_NOT_SCAFFOLDED.fasta >> bionano_combined.fa
 
-#python3 remove_fake_cut_sites_DNAnexus.py /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/hybrid_scaffolds/l3_combined.fa /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/fakeCuts.fa /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/fakeCuts.log
+cd ${OUT_DIR}/${ASSEMBLY_NAME}/${ASSEMBLY_NAME}
 
-#python3 trim_Ns_DNAnexus.py /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/fakeCuts.fa /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/fakeCuts.list
+python3 ${BIONANO_DIR}/remove_fake_cut_sites_DNAnexus.py hybrid_scaffolds/bionano_combined.fa fakeCuts.fa fakeCuts.log
 
-python3 clip_regions_DNAnexus.py /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/fakeCuts.fa /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/fakeCuts.list  /scratch/ddepanis/Elephant_project/mEleMax1/intermediates/bionano/l3/l3_s1.fa
-~                                                                             
+python3 ${BIONANO_DIR}/trim_Ns_DNAnexus.py fakeCuts.fa fakeCuts.list
+
+python3 ${BIONANO_DIR}/clip_regions_DNAnexus.py fakeCuts.fa fakeCuts.list l3_s1.fa
