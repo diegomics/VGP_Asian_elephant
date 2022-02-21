@@ -1,25 +1,14 @@
 #!/bin/bash
 
 #SBATCH -J trimNs
-#SBATCH -o /scratch/ddepanis/stdout/trimNs.%j.out
-#SBATCH -e /scratch/ddepanis/stderr/trimNs.%j.err
-##SBATCH -D 
 
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=ddepanis@zedat.fu-berlin.de
+#SBATCH --mail-type=FAIL,END
 
-#SBATCH --partition=begendiv,main
-##SBATCH -w b004
-#SBATCH --qos=standard
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=12G
-#SBATCH --time=240:00:00 
+#SBATCH --time=1-00:00:00 
 
-module load Biopython/1.73-foss-2018b-Python-3.6.6
-
-## Only change this: ############################################
-#################################################################
-
+cd 
 #cat mEleMax1_Saphyr_DLE1_3680720_bppAdjust_cmap_l3_108_purged_36_108_fa_NGScontigs_HYBRID_SCAFFOLD_NCBI.fasta > l3_combined.fa ; cat mEleMax1_Saphyr_DLE1_3680720_bppAdjust_cmap_l3_108_purged_36_108_fa_NGScontigs_HYBRID_SCAFFOLD_NOT_SCAFFOLDED.fasta >> l3_combined.fa
 
 cd /scratch/ddepanis/Software/bionano/trimNs
