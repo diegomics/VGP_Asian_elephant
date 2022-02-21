@@ -243,4 +243,3 @@ def sort_termini(terminus):
 
 if __name__ == "__main__":
 		main()
-
