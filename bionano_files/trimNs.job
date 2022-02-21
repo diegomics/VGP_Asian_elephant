@@ -6,6 +6,9 @@
 #SBATCH --mem=12G
 #SBATCH --time=1-00:00:00 
 
+export PATH="${CONDA_BIN_DIR}:${PATH}"
+source activate bionano
+
 cd ${OUT_DIR}/${ASSEMBLY_NAME}/${ASSEMBLY_NAME}/hybrid_scaffolds
 
 cat *NGScontigs_HYBRID_SCAFFOLD_NCBI.fasta > bionano_combined.fa ; cat *NGScontigs_HYBRID_SCAFFOLD_NOT_SCAFFOLDED.fasta >> bionano_combined.fa
