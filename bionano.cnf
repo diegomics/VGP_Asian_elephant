@@ -1,4 +1,4 @@
-export BIONANO_DIR="/path/to/VGP_Asian_elephant/bionano_files"
+export BIONANO_FILES_DIR="/path/to/VGP_Asian_elephant/bionano_files"
 export OUT_DIR="/path/to/bionano_out_dir"
 export ASSEMBLY="/path/to/assembly_file"
 #export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
