@@ -3,8 +3,8 @@
 #SBATCH -J trimNs
 #SBATCH --mail-type=END,FAIL
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=12G
-#SBATCH --time=1-00:00:00 
+#SBATCH --mem=4G
+#SBATCH --time=01:00:00 
 
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate bionano
