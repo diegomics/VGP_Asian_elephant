@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J arima.index
+#SBATCH -J arima.index2
 #SBATCH --mail-type=END,FAIL
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
