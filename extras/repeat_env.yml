@@ -1,0 +1,8 @@
+name: REPEAT_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - singularity=3.8.7
+  - bedops=2.4.39
