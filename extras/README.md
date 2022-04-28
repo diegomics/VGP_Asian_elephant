@@ -10,7 +10,7 @@
 
 2) Install needed software with: `bash 2.install_repeat_dependencies.sh`
 
-3) Run the pipeline:
+3) Choose one running mode:
 
 . Option A: using slurm with: `bash 3a.Run_RepeatM_slurm.sh`
 
