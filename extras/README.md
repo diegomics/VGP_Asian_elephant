@@ -1,6 +1,9 @@
 ## Annotation and masking of repeats in the genome
 🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷🐘🧬😷
 
+## Requirements:
+* [Conda](https://docs.conda.io)
+
 1) Edit `1.repeat_variables.cnf` file with the respective paths, values and parameters.
 
 2) Set singularity container:
