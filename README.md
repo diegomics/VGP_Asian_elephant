@@ -7,7 +7,6 @@
 
 ## Requirements:
 * [Slurm](https://slurm.schedmd.com)
-* [Singularity](https://sylabs.io)
 * [Conda](https://docs.conda.io)
 
 ## Installation:
