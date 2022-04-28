@@ -12,7 +12,7 @@
 
 3) Choose one running mode:
 
-. Option A: using slurm with: `bash 3a.Run_RepeatM_slurm.sh`
+. Option A: using _Slurm_ with: `bash 3a.Run_RepeatM_slurm.sh`
 
 . Option B: on a single machine (no slurm) using 12 cpus and 48 Gb of RAM with: `nohup bash 3b.Run_RepeatM.sh 2>&1 &`
 
