@@ -4,11 +4,12 @@
 ## Requirements:
 * [Conda](https://docs.conda.io)
 
+## Run the pipeline:
+
 1) Edit `1.repeat_variables.cnf` file with the respective paths, values and parameters.
 
-2) Set singularity container:
+2) Install needed software:
 ```bash
-cd ~/VGP_Asian_elephant/extras
 bash 2.install_repeat_dependencies.sh
 ```
 
