@@ -12,9 +12,10 @@
 
 3) Choose one running mode:
 
-. Option A: using _Slurm_ with: `bash 3a.Run_RepeatM_slurm.sh`
+. Mode A: using _Slurm_ with: `bash 3a.Run_RepeatM_slurm.sh`
 
-. Option B: on a single machine (no _Slurm_) using 12 cpus and 48 Gb of RAM with: `nohup bash 3b.Run_RepeatM.sh 2>&1 &`
+. Mode B: on a single machine (no _Slurm_) with: `nohup bash 3b.Run_RepeatM.sh 2>&1 &`
 
+\*) Both modes use up to 12 cpus and 48 Gb of RAM
 
-\*) For the Asian elephant genome, it takes ~40 h to finish RepeatModeler. The complete pipeline takes ~50 h.
+\**) For the Asian elephant genome, it takes ~40 h to finish RepeatModeler. The complete pipeline takes ~50 h.
