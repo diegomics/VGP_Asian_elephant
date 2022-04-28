@@ -8,7 +8,9 @@
 #SBATCH --mem=48G
 #SBATCH --time=3-00:00:00
 
-$LOAD_SINGULARITY
+
+export PATH="${CONDA_BIN_DIR}:${PATH}"
+source activate REPEAT_env
 
 export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
 
@@ -55,6 +57,10 @@ singularity exec --bind ${BIND_DIR}:${BIND_DIR} "${INSTALLATION_DIR}/tetools_lat
 RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}_combined.fa" ${ASSEMBLY_NAME}
 
 mv ${ASSEMBLY_NAME}.masked ${ASSEMBLY_NAME}.masked.fa
+
+# generate a bed files useful for masking
+rmsk2bed --max-mem 48G < ${ASSEMBLY_NAME}.out > ${ASSEMBLY_NAME}.bed
+cut -f1,2,3 ${ASSEMBLY_NAME}.bed > ${ASSEMBLY_NAME}.3cols.bed
 
 echo "=== 5/5. Plotting results...  ========================================================"
 
