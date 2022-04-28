@@ -1,0 +1,16 @@
+# variables for the repeats annotation and masking pipeline:
+export INSTALLATION_DIR="../VGP_Asian_elephant/extras"
+export OUT_DIR="/path/for/results"
+export ASSEMBLY="/path/to/assembly.fasta"
+export SPECIES_NAME='Elephas maximus'
+
+# conda-specific variables
+export CONDA_BIN_DIR="/path/to/conda/bin"
+
+# singularity-specific variables
+export BIND_DIR="/path/to/bind/folder/"
+
+# slurm-specific variables
+export USER_MAIL='user@mail.de'
+export PARTITION='begendiv,main'
+export QUEUE="standard"
