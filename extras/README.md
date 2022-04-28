@@ -19,3 +19,18 @@
 \*) Both modes use up to 12 cpus and 48 Gb of RAM
 
 \**) For the Asian elephant genome, it takes ~40 h to finish RepeatModeler. The complete pipeline takes ~50 h.
+
+## Output:
+```
+output_folder
+├── 01_modeler
+│   └── ..
+├── 02_libraries
+│   └── ..
+└── 03_masker
+    ├── ..
+    ├── <..>.out
+    ├── <..>.tbl
+    ├── <..>.bed
+    └── <..>.masked.fa
+```
