@@ -8,10 +8,7 @@
 
 1) Edit `1.repeat_variables.cnf` file with the respective paths, values and parameters.
 
-2) Install needed software:
-```bash
-bash 2.install_repeat_dependencies.sh
-```
+2) Install needed software: `bash 2.install_repeat_dependencies.sh`
 
 3) Run the pipeline:
 
