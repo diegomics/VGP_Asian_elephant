@@ -22,7 +22,7 @@
 
 ## Output:
 ```
-output_folder
+<output_folder>
 ├── 01_modeler
 │   └── ..
 ├── 02_libraries
