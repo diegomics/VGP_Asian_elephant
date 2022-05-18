@@ -4,7 +4,8 @@
 ## Requirements:
 * [Conda](https://docs.conda.io)
 * [Singularity](https://sylabs.io/guides/3.0/user-guide/index.html)
-(the idea is to soon provide Singularity in the conda environment, but it is not yet functinoal)
+
+(the idea is to 'soon' provide Singularity in the conda environment, but it is not yet functional)
 
 ## Run the pipeline:
 
