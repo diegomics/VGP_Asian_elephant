@@ -3,6 +3,8 @@
 
 ## Requirements:
 * [Conda](https://docs.conda.io)
+* [Singularity](https://sylabs.io/guides/3.0/user-guide/index.html)
+(the idea is to soon provide Singularity in the conda environment, but it is not yet functinoal)
 
 ## Run the pipeline:
 
@@ -23,11 +25,11 @@
 ## Output:
 ```
 <output_folder>
-├── 01_modeler
+├── 1_modeler
 │   └── ..
-├── 02_libraries
+├── 2_libraries
 │   └── ..
-└── 03_masker
+└── 3_masker
     ├── ..
     ├── <..>.html    
     ├── <..>.out
