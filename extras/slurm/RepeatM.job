@@ -6,20 +6,32 @@
 
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=48G
-#SBATCH --time=3-00:00:00
+#SBATCH --time=5-00:00:00
 
 
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate REPEAT_env
 
-export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+$LOAD_SINGULARITY #comment if singularity is in path
 
 
 echo "=== 1/5. Indexing genome for RepeatModeler...  ======================================="
 
 mkdir -p "${OUT_DIR}/01_modeler"
 cd "${OUT_DIR}/01_modeler"
-ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
+
+if [[ "${ASSEMBLY##*.}" == "gz" ]]
+then
+        INTER=$(basename ${ASSEMBLY} .gz)
+        export ASSEMBLY_NAME=$(basename $INTER .${INTER##*.})
+        gunzip -c ${ASSEMBLY} > "${ASSEMBLY_NAME}.fa"
+elif  [[ "${ASSEMBLY##*.}" == "fa" ]] || [[ "${ASSEMBLY##*.}" == "fasta" ]] || [[ "${ASSEMBLY##*.}" == "fna" ]]
+then
+        export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+        ln -s ${ASSEMBLY} "${ASSEMBLY_NAME}.fa"
+else
+        echo "Invalid reference extension name!"
+fi
 
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} "${INSTALLATION_DIR}/tetools_latest.sif" \
 BuildDatabase -name ${ASSEMBLY_NAME} ${ASSEMBLY_NAME}.fa
