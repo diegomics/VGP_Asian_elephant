@@ -1,7 +1,7 @@
 # variables for the repeats annotation and masking pipeline:
 export INSTALLATION_DIR="/path/to/VGP_Asian_elephant/extras"
 export OUT_DIR="/path/for/results"
-export ASSEMBLY="/path/to/assembly.fasta"
+export ASSEMBLY="/path/to/assembly.file" # .fa .fasta .fna #also can be gzipped
 export SPECIES_NAME='Elephas maximus'
 
 # conda-specific variables
@@ -14,3 +14,4 @@ export BIND_DIR="/path/to/bind/folder/"
 export USER_MAIL='user@mail.de'
 export PARTITION='begendiv,main'
 export QUEUE="standard"
+export LOAD_SINGULARITY='module load singularity' # comment this line if singularity is in path
