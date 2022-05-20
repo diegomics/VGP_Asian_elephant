@@ -3,14 +3,26 @@ source 1.repeat_variables.cnf
 export PATH="${CONDA_BIN_DIR}:${PATH}"
 source activate REPEAT_env
 
-export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+$LOAD_SINGULARITY #comment if singularity is in path
 
 
 echo "=== 1/5. Indexing genome for RepeatModeler...  ======================================="
 
-mkdir -p "${OUT_DIR}/01_modeler"
-cd "${OUT_DIR}/01_modeler"
-ln -s $ASSEMBLY ${ASSEMBLY_NAME}.fa
+mkdir -p "${OUT_DIR}/1_modeler"
+cd "${OUT_DIR}/1_modeler"
+
+if [[ "${ASSEMBLY##*.}" == "gz" ]]
+then
+        INTER=$(basename ${ASSEMBLY} .gz)
+        export ASSEMBLY_NAME=$(basename $INTER .${INTER##*.})
+        gunzip -c ${ASSEMBLY} > "${ASSEMBLY_NAME}.fa"
+elif  [[ "${ASSEMBLY##*.}" == "fa" ]] || [[ "${ASSEMBLY##*.}" == "fasta" ]] || [[ "${ASSEMBLY##*.}" == "fna" ]]
+then
+        export ASSEMBLY_NAME=$(basename $ASSEMBLY .${ASSEMBLY##*.})
+        ln -s ${ASSEMBLY} "${ASSEMBLY_NAME}.fa"
+else
+        echo "Invalid reference extension name!"
+fi
 
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} "${INSTALLATION_DIR}/tetools_latest.sif" \
 BuildDatabase -name ${ASSEMBLY_NAME} ${ASSEMBLY_NAME}.fa
@@ -24,25 +36,25 @@ RepeatModeler -database ${ASSEMBLY_NAME} -pa ${SLURM_CPUS_PER_TASK} -LTRStruct
 
 echo "=== 3/5. Combining repeats libraries...  =============================================="
 
-mkdir -p "${OUT_DIR}/02_libraries"
-cd "${OUT_DIR}/02_libraries"
+mkdir -p "${OUT_DIR}/2_libraries"
+cd "${OUT_DIR}/2_libraries"
 
 #extract a species-specific FASTA library from the installed libraries
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} --pwd /opt/RepeatMasker/Libraries/ "${INSTALLATION_DIR}/tetools_latest.sif" \
 famdb.py -i RepeatMaskerLib.h5 families --format fasta_name --include-class-in-name --ancestors --descendants "${SPECIES_NAME}" > ${ASSEMBLY_NAME}-rm.fa
 
 #combine libraries
-cat ${ASSEMBLY_NAME}-rm.fa "${OUT_DIR}/01_modeler/${ASSEMBLY_NAME}-families.fa" > "${ASSEMBLY_NAME}_combined.fa"
+cat ${ASSEMBLY_NAME}-rm.fa "${OUT_DIR}/1_modeler/${ASSEMBLY_NAME}-families.fa" > "${ASSEMBLY_NAME}_combined.fa"
 
 
 echo "=== 4/5. Starting RepeatMasker...  ==================================================="
 
-mkdir -p "${OUT_DIR}/03_masker"
-cd "${OUT_DIR}/03_masker"
+mkdir -p "${OUT_DIR}/3_masker"
+cd "${OUT_DIR}/3_masker"
 ln -s $ASSEMBLY ${ASSEMBLY_NAME}
 
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} "${INSTALLATION_DIR}/tetools_latest.sif" \
-RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/02_libraries/${ASSEMBLY_NAME}_combined.fa" ${ASSEMBLY_NAME}
+RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/2_libraries/${ASSEMBLY_NAME}_combined.fa" ${ASSEMBLY_NAME}
 
 mv ${ASSEMBLY_NAME}.masked ${ASSEMBLY_NAME}.masked.fa
 
