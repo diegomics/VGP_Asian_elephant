@@ -51,7 +51,7 @@ echo "=== 4/5. Starting RepeatMasker...  =======================================
 
 mkdir -p "${OUT_DIR}/3_masker"
 cd "${OUT_DIR}/3_masker"
-ln -s $ASSEMBLY ${ASSEMBLY_NAME}
+ln -s "${OUT_DIR}/01_modeler/${ASSEMBLY_NAME}.fa" ${ASSEMBLY_NAME}
 
 singularity exec --bind ${BIND_DIR}:${BIND_DIR} "${INSTALLATION_DIR}/tetools_latest.sif" \
 RepeatMasker -pa ${SLURM_CPUS_PER_TASK} -a -s -gccalc -xsmall -lib "${OUT_DIR}/2_libraries/${ASSEMBLY_NAME}_combined.fa" ${ASSEMBLY_NAME}
