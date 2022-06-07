@@ -5,7 +5,7 @@
 #SBATCH --mail-type=END,FAIL
 
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=48G
+#SBATCH --mem=64G
 #SBATCH --time=5-00:00:00
 
 
